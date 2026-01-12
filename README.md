@@ -8,7 +8,7 @@ A simple Minecraft-like voxel game built with Python and the Ursina game engine.
 - **Block Interaction**: Left-click to place blocks, right-click to remove them.
 - **First-Person Controls**: Move around with WASD, look with mouse.
 - **Configurable World**: Adjustable world size, seed, and terrain parameters.
-- **Collision Detection**: Prevents placing blocks where they already exist.
+- **Available Blocks**: Select from Grass, Stone, Brick, and Dirt.
 
 ## Installation
 
@@ -44,6 +44,11 @@ A game window will open with the 3D world.
 - **Look Around**: Mouse movement
 - **Place Block**: Left mouse click (on a block face)
 - **Remove Block**: Right mouse click (on a block)
+- **Select Block**: Keys 1-4
+  - `1`: Grass
+  - `2`: Stone
+  - `3`: Brick
+  - `4`: Dirt
 - **Exit**: Close the window or press Alt+F4
 
 ## Configuration
@@ -86,10 +91,9 @@ minecraft-basic-by-python/
 This project is open source. Feel free to use and modify it.
 
 
-
 ## Future Improvements
 
-- Multiple block types (stone, wood, etc.)
+- Inventory system
 - Inventory system
 - Day/night cycle
 - Save/load world functionality
