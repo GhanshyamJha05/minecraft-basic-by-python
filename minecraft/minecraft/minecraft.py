@@ -29,7 +29,14 @@ for x in range(WORLD_SIZE):
 # Position player above the terrain
 player.position = (WORLD_SIZE // 2, HEIGHT_MAX + 5, WORLD_SIZE // 2)
 
+block_pick = 1
+
 def input(key):
+    global block_pick
+    if key == '1': block_pick = 1
+    if key == '2': block_pick = 2
+    if key == '3': block_pick = 3
+    if key == '4': block_pick = 4
     to_remove = []
     for box in boxes:
         if box.hovered:
@@ -37,7 +44,12 @@ def input(key):
                 new_pos = box.position + mouse.normal
                 # Check if a block already exists at this position
                 if not any(b.position == new_pos for b in boxes):
-                    new = Button(color=color.white, model='cube', position=new_pos,
+                    if block_pick == 1: block_color = color.white
+                    if block_pick == 2: block_color = color.gray
+                    if block_pick == 3: block_color = color.red
+                    if block_pick == 4: block_color = color.orange
+
+                    new = Button(color=block_color, model='cube', position=new_pos,
                                 texture='grass.png', parent=scene, origin_y=0.5)
                     boxes.append(new)
             if key == 'right mouse down':
