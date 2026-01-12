@@ -1,6 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from noise import pnoise2
+from opensimplex import OpenSimplex
 
 app = Ursina()
 player = FirstPersonController()
@@ -12,11 +12,14 @@ SEED = 42
 SCALE = 0.1
 HEIGHT_MAX = 10
 
+# Initialize noise generator
+simplex = OpenSimplex(seed=SEED)
+
 boxes = []
 for x in range(WORLD_SIZE):
     for z in range(WORLD_SIZE):
-        # Generate height using Perlin noise
-        noise_val = pnoise2(x * SCALE, z * SCALE, base=SEED)
+        # Generate height using OpenSimplex noise
+        noise_val = simplex.noise2d(x * SCALE, z * SCALE)
         height = int((noise_val + 1) * HEIGHT_MAX / 2)
         for y in range(height):
             box = Button(color=color.white, model='cube', position=(x, y, z),
