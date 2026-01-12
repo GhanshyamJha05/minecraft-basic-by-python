@@ -19,7 +19,7 @@ boxes = []
 for x in range(WORLD_SIZE):
     for z in range(WORLD_SIZE):
         # Generate height using OpenSimplex noise
-        noise_val = simplex.noise2d(x * SCALE, z * SCALE)
+        noise_val = simplex.noise2(x * SCALE, z * SCALE)
         height = int((noise_val + 1) * HEIGHT_MAX / 2)
         for y in range(height):
             box = Button(color=color.white, model='cube', position=(x, y, z),
