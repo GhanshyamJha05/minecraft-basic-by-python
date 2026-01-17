@@ -88,6 +88,8 @@ minecraft-basic-by-python/
 
 ## Future Improvements
 
+- Inventory system
+- Day/night cycle
 - Save/load world functionality
 - Enemy AI and basic combat
 - Inventory menu (press 'E')
