@@ -94,7 +94,6 @@ This project is open source. Feel free to use and modify it.
 ## Future Improvements
 
 - Inventory system
-- Inventory system
 - Day/night cycle
 - Save/load world functionality
 - Multiplayer support
