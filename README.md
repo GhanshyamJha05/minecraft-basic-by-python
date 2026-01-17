@@ -1,6 +1,17 @@
-# Minecraft Basic by Python
+# Minecraft Basic by Python (Enhanced)
 
-A simple Minecraft-like voxel game built with Python and the Ursina game engine. Features procedural terrain generation, block placement, and removal in a 3D world.
+A simple but powerful Minecraft-like voxel game built with Python and the Ursina game engine. This project features procedural terrain generation, multiple block types, and an optimized game engine logic.
+
+## 🚀 New Features (Commendable Updates)
+
+- **Procedural Trees**: Realistic Oak trees spawned throughout the world using a custom growth algorithm.
+- **Atmospheric Effects**: Moving clouds and a complete Day/Night cycle with rotating lighting.
+- **Sprinting**: Enhanced player mobility—hold `Shift` to run faster through the terrain.
+- **Night Exploration**: Toggleable Flashlight (Press `F`) to explore the world as the sun goes down.
+- **Coordinate System**: Real-time position tracking displayed in the HUD.
+- **Refined Animations**: Procedural hand bobbing and smoother interaction feedback.
+- **Optimized Performance**: Replaced O(N) block detection with O(1) dictionary-based lookup.
+- **Interactive HUD**: Added a crosshair, block indicator, and coordinate display.
 
 ## Features
 
@@ -8,7 +19,6 @@ A simple Minecraft-like voxel game built with Python and the Ursina game engine.
 - **Block Interaction**: Left-click to place blocks, right-click to remove them.
 - **First-Person Controls**: Move around with WASD, look with mouse.
 - **Configurable World**: Adjustable world size, seed, and terrain parameters.
-- **Available Blocks**: Select from Grass, Stone, Brick, and Dirt.
 
 ## Installation
 
@@ -23,11 +33,6 @@ A simple Minecraft-like voxel game built with Python and the Ursina game engine.
    pip install -r requirements.txt
    ```
 
-   Or manually:
-   ```bash
-   pip install ursina opensimplex
-   ```
-
 ## How to Run
 
 Navigate to the game directory and run:
@@ -36,29 +41,29 @@ cd minecraft/minecraft
 python minecraft.py
 ```
 
-A game window will open with the 3D world.
-
 ## Controls
 
 - **Movement**: WASD keys
-- **Look Around**: Mouse movement
-- **Place Block**: Left mouse click (on a block face)
-- **Remove Block**: Right mouse click (on a block)
-- **Select Block**: Keys 1-4
-  - `1`: Grass
-  - `2`: Stone
-  - `3`: Brick
-  - `4`: Dirt
-- **Exit**: Close the window or press Alt+F4
+- **Sprint**: Hold `Left Shift`
+- **Flashlight**: Press `F` to toggle
+- **Place Block**: Left mouse click
+- **Remove Block**: Right mouse click
+- **Select Block (1-5)**: 
+    - `1`: Grass
+    - `2`: Dirt
+    - `3`: Stone
+    - `4`: Wood (Brick Texture)
+    - `5`: Gold
+- **Exit**: Press `Esc` or close the window
 
 ## Configuration
 
 You can modify the constants in `minecraft.py` to customize the game:
 
-- `WORLD_SIZE`: Size of the world (default: 50)
-- `SEED`: Random seed for terrain generation (default: 42)
-- `SCALE`: Noise scale for terrain variation (default: 0.1)
-- `HEIGHT_MAX`: Maximum terrain height (default: 10)
+- `WORLD_SIZE`: Size of the world (default: 30)
+- `SEED`: Random seed for terrain generation
+- `SCALE`: Noise scale for terrain variation
+- `HEIGHT_MAX`: Maximum terrain height
 
 ## Dependencies
 
@@ -71,29 +76,22 @@ You can modify the constants in `minecraft.py` to customize the game:
 minecraft-basic-by-python/
 ├── minecraft/
 │   └── minecraft/
-│       ├── minecraft.py    # Main game file
-│       └── grass.png       # Block texture
+│       ├── minecraft.py    # Main game file (Updated)
+│       ├── grass.png       # Grass texture
+│       ├── dirt.png        # Dirt texture
+│       ├── stone.png       # Stone texture
+│       ├── brick.png       # Wood/Brick texture
+│       └── gold.png        # Gold texture
 ├── requirements.txt        # Python dependencies
-├── README.md              # This file
-└── PR_DESCRIPTION.md      # Pull request description
+└── README.md              # Documentation
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is open source. Feel free to use and modify it.
-
 
 ## Future Improvements
 
 - Inventory system
 - Day/night cycle
 - Save/load world functionality
-- Multiplayer support
+- Enemy AI and basic combat
+- Inventory menu (press 'E')
+- Multiplayer support (UDP/TCP)
+- Biomes (Desert, Forest, Snowy)
