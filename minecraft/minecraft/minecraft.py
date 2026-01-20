@@ -63,4 +63,9 @@ def input(key):
         quit()
 
 if __name__ == '__main__':
-    app.run()
+    try:
+        app.run()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        input("Press Enter to exit...")
