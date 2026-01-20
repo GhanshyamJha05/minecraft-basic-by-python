@@ -7,7 +7,8 @@ class Sky(Entity):
             model='sphere',
             texture='sky_default',
             scale=1000,
-            double_sided=True
+            double_sided=True,
+            color=color.rgb(200, 200, 255)
         )
 
 class Hand(Entity):

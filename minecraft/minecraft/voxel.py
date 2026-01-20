@@ -6,15 +6,15 @@ from config import BLOCK_TEXTURES
 voxels = {}
 
 class Voxel(Button):
-    def __init__(self, position=(0,0,0), texture='grass.png', color=color.white):
+    def __init__(self, position=(0,0,0), texture='grass.png', block_color=color.white):
         super().__init__(
             parent=scene,
             position=position,
             model='cube',
             origin_y=0.5,
             texture=texture,
-            color=color,
-            highlight_color=color.light_gray,
+            color=block_color,
+            highlight_color=color.lime,
         )
         voxels[position] = self
 
@@ -31,7 +31,7 @@ class Voxel(Button):
                     if current_block_id == '4': # Wood logic
                         col = color.brown
                     
-                    Voxel(position=new_pos, texture=tex, color=col)
+                    Voxel(position=new_pos, texture=tex, block_color=col)
             
             if key == 'right mouse down':
                 if self.position in voxels:

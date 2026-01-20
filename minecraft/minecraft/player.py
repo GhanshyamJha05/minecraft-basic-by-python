@@ -30,7 +30,8 @@ class PlayerController(FirstPersonController):
             self.speed = 5
             
         # Hand bobbing
-        if self.walking:
+        walking = held_keys['w'] or held_keys['a'] or held_keys['s'] or held_keys['d']
+        if walking:
             self.hand.position = Vec3(0.6, -0.6 + (math.sin(time.time() * 10) * 0.02), 0)
 
     def toggle_flashlight(self):

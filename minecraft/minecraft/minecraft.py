@@ -24,9 +24,14 @@ block_indicator = Text(text=f'Current Block: {BLOCK_NAMES[DEFAULT_BLOCK]}', posi
 coord_text = Text(text='', position=(0.65, 0.48), scale=1, color=color.white)
 
 # Initialize
-generate_terrain()
-player = PlayerController()
+from mesh_terrain import MeshTerrain
+terrain = MeshTerrain()
+player = PlayerController(position=(15, 20, 15))
 sky = Sky()
+
+# Visual Polish
+scene.fog_color = color.rgb(200, 200, 255)
+scene.fog_density = 0.02
 
 # Clouds
 clouds = [Cloud(pos=(random.randint(-50, 50), 20, random.randint(-50, 50)), scale=(random.randint(5,15), 1, random.randint(5,15))) for _ in range(10)]

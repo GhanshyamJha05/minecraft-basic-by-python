@@ -10,7 +10,7 @@ def create_tree(pos):
     x, y, z = pos
     # Trunk (Brick used as Wood)
     for i in range(1, 5):
-        Voxel(position=(x, y + i, z), texture='brick.png', color=color.brown)
+        Voxel(position=(x, y + i, z), texture='brick.png', block_color=color.brown)
     # Leaves (Grass used as Leaves)
     for i in range(-2, 3):
         for j in range(-2, 3):
@@ -18,7 +18,7 @@ def create_tree(pos):
                 if abs(i) + abs(j) <= 2:
                     pos_leaf = (x + i, y + k, z + j)
                     if pos_leaf not in voxels:
-                        Voxel(position=pos_leaf, texture='grass.png', color=color.green)
+                        Voxel(position=pos_leaf, texture='grass.png', block_color=color.green)
 
 def generate_terrain():
     print("Generating terrain...")
@@ -43,7 +43,7 @@ def generate_terrain():
                 if tex == 'stone.png' and random.random() < 0.05:
                     tex = 'gold.png'
                     
-                Voxel(position=(x, y, z), texture=tex, color=col)
+                Voxel(position=(x, y, z), texture=tex, block_color=col)
 
             # Randomly place trees on grass
             if height > 2 and random.random() < 0.02:
