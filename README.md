@@ -2,23 +2,21 @@
 
 A simple but powerful Minecraft-like voxel game built with Python and the Ursina game engine. This project features procedural terrain generation, multiple block types, and an optimized game engine logic.
 
-## 🚀 New Features (Commendable Updates)
+## 🚀 Major Updates (Performance & Visuals)
 
-- **Procedural Trees**: Realistic Oak trees spawned throughout the world using a custom growth algorithm.
-- **Atmospheric Effects**: Moving clouds and a complete Day/Night cycle with rotating lighting.
-- **Sprinting**: Enhanced player mobility—hold `Shift` to run faster through the terrain.
-- **Night Exploration**: Toggleable Flashlight (Press `F`) to explore the world as the sun goes down.
-- **Coordinate System**: Real-time position tracking displayed in the HUD.
-- **Refined Animations**: Procedural hand bobbing and smoother interaction feedback.
-- **Optimized Performance**: Replaced O(N) block detection with O(1) dictionary-based lookup.
-- **Interactive HUD**: Added a crosshair, block indicator, and coordinate display.
+- **Mesh Terrain System**: Moved from individual entities to a single mesh-based rendering system, boosting FPS essentially to infinity for this scale.
+- **Modular Architecture**: Refactored the monolithic code into a clean, maintainable structure (`minecraft.py`, `mesh_terrain.py`, `player.py`, etc.).
+- **Visual Polish**: Added distance fog, seamless skybox, and vertex-based ambient occlusion (AO) for depth.
+- **Robustness**: Fixed critical crashes and implemented a solid-color fallback for reliable rendering on all systems.
 
 ## Features
 
 - **Procedural Terrain Generation**: Uses OpenSimplex noise to create natural-looking landscapes with hills and valleys.
-- **Block Interaction**: Left-click to place blocks, right-click to remove them.
-- **First-Person Controls**: Move around with WASD, look with mouse.
-- **Configurable World**: Adjustable world size, seed, and terrain parameters.
+- **Optimized Rendering**: Uses chunk-like mesh generation with face culling.
+- **Interactive World**: Place and destroy blocks in real-time.
+- **First-Person Controls**: Smooth movement, sprinting (Shift), and flashlight (F).
+- **Environment**: Day/Night cycle with moving sun and clouds.
+- **Block Types**: Grass, Dirt, Stone, Wood, and Gold.
 
 ## Installation
 
@@ -35,40 +33,11 @@ A simple but powerful Minecraft-like voxel game built with Python and the Ursina
 
 ## How to Run
 
-Navigate to the game directory and run:
+Navigate to the game directory and run the main entry point:
 ```bash
 cd minecraft/minecraft
 python minecraft.py
 ```
-
-## Controls
-
-- **Movement**: WASD keys
-- **Sprint**: Hold `Left Shift`
-- **Flashlight**: Press `F` to toggle
-- **Place Block**: Left mouse click
-- **Remove Block**: Right mouse click
-- **Select Block (1-5)**: 
-    - `1`: Grass
-    - `2`: Dirt
-    - `3`: Stone
-    - `4`: Wood (Brick Texture)
-    - `5`: Gold
-- **Exit**: Press `Esc` or close the window
-
-## Configuration
-
-You can modify the constants in `minecraft.py` to customize the game:
-
-- `WORLD_SIZE`: Size of the world (default: 30)
-- `SEED`: Random seed for terrain generation
-- `SCALE`: Noise scale for terrain variation
-- `HEIGHT_MAX`: Maximum terrain height
-
-## Dependencies
-
-- **Ursina**: Game engine for Python
-- **OpenSimplex**: Pure Python noise library for terrain generation
 
 ## Project Structure
 
@@ -76,20 +45,21 @@ You can modify the constants in `minecraft.py` to customize the game:
 minecraft-basic-by-python/
 ├── minecraft/
 │   └── minecraft/
-│       ├── minecraft.py    # Main game file (Updated)
-│       ├── grass.png       # Grass texture
-│       ├── dirt.png        # Dirt texture
-│       ├── stone.png       # Stone texture
-│       ├── brick.png       # Wood/Brick texture
-│       └── gold.png        # Gold texture
-├── requirements.txt        # Python dependencies
-└── README.md              # Documentation
+│       ├── minecraft.py      # Main Entry Point
+│       ├── mesh_terrain.py   # Optimized Mesh Generation Logic
+│       ├── player.py         # Player Movement & Input
+│       ├── environment.py    # Sky, Fog, Clouds
+│       ├── voxel.py          # Individual Voxel Logic (Fallback/Hybrid)
+│       ├── config.py         # Global Constants (Seed, World Size)
+│       ├── state.py          # Shared Game State
+│       └── assets/           # Textures (grass.png, etc.)
+├── requirements.txt          # Python dependencies
+├── .gitignore               # System file exclusions
+└── README.md                # Documentation
 ```
 
 ## Future Improvements
 
-- Inventory system
-- Day/night cycle
 - Save/load world functionality
 - Enemy AI and basic combat
 - Inventory menu (press 'E')
