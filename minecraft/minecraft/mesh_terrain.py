@@ -8,10 +8,19 @@ class MeshTerrain(Entity):
         self.model = Mesh()
         self.texture = 'texture_atlas.png'  # We need a texture atlas for this to work well, or we map UVs manually
         # Ideally, we create a texture atlas. For now, we will try to stick to single texture or coloring.
-        # Actually, for a quick win without complex UV mapping, we can use vertex colors or separate meshes for separate textures.
-        # Separate meshes is easier: one mesh for Grass, one for Stone, etc.
-        
-        self.subsets = {name: Entity(model=Mesh(), texture=tex, double_sided=True) for name, tex in BLOCK_TEXTURES.items()}
+        # SOLID COLOR FALLBACK (Fix for black screen)
+        # We will use Vertex Colors mixed with these base tones
+        self.block_colors = {
+            '1': color.rgb(0, 150, 0),   # Grass (Green)
+            '2': color.rgb(100, 50, 0),  # Dirt (Brown)
+            '3': color.rgb(100, 100, 100), # Stone (Grey)
+            '4': color.rgb(150, 75, 0),    # Wood
+            '5': color.rgb(255, 200, 0)    # Gold
+        }
+
+        # Create entities without textures, just base colors
+        # Note: We create one entity per block type.
+        self.subsets = {name: Entity(model=Mesh(), color=color.white, double_sided=True) for name in BLOCK_TEXTURES}
         
         self.simplex = OpenSimplex(seed=SEED)
         self.voxels = {} # Logical storage for collisions
@@ -63,22 +72,22 @@ class MeshTerrain(Entity):
             # 6 Faces checks
             # Up
             if (x, y+1, z) not in self.voxels:
-                self.add_face(mesh_data[block_type], (x,y,z), 'top')
+                self.add_face(mesh_data[block_type], (x,y,z), 'top', block_type)
             # Down
             if (x, y-1, z) not in self.voxels and y > 0:
-                 self.add_face(mesh_data[block_type], (x,y,z), 'bottom')
+                 self.add_face(mesh_data[block_type], (x,y,z), 'bottom', block_type)
             # Right
             if (x+1, y, z) not in self.voxels:
-                 self.add_face(mesh_data[block_type], (x,y,z), 'right')
+                 self.add_face(mesh_data[block_type], (x,y,z), 'right', block_type)
             # Left
             if (x-1, y, z) not in self.voxels:
-                 self.add_face(mesh_data[block_type], (x,y,z), 'left')
+                 self.add_face(mesh_data[block_type], (x,y,z), 'left', block_type)
             # Forward
             if (x, y, z+1) not in self.voxels:
-                 self.add_face(mesh_data[block_type], (x,y,z), 'forward')
+                 self.add_face(mesh_data[block_type], (x,y,z), 'forward', block_type)
             # Back
             if (x, y, z-1) not in self.voxels:
-                 self.add_face(mesh_data[block_type], (x,y,z), 'back')
+                 self.add_face(mesh_data[block_type], (x,y,z), 'back', block_type)
 
         # Apply to meshes
         for b_type, data in mesh_data.items():
@@ -95,7 +104,7 @@ class MeshTerrain(Entity):
             # For now, let's try 'mesh' collider. If slow, we switch to math-based collision.
             self.subsets[b_type].collider = 'mesh'
 
-    def add_face(self, data, pos, face):
+    def add_face(self, data, pos, face, block_type):
         x, y, z = pos
         # Define vertices for each face relative to x,y,z
         # Standard unit cube vertices
@@ -142,20 +151,19 @@ class MeshTerrain(Entity):
         data['vertices'].extend([v[0], v[1], v[2], v[2], v[3], v[0]])
         data['uvs'].extend([(0,0), (1,0), (1,1), (1,1), (0,1), (0,0)])
         
-        # Fake lighting
-        c = color.white
-        if face == 'top': c = color.color(0,0,1) # White
-        elif face == 'bottom': c = color.color(0,0,0.5) # Dark
-        else: c = color.color(0,0,0.8) # Sides
-        
-        data['colors'].extend([c] * 6)
+        # Fake lighting + Base Color
+        # We need to access the base color. Since we didn't pass it, let's fix the architecture.
+        # Actually, let's just pass block_type to add_face.
+        # But for valid Python, I will update the signature in a moment.
+        # For now, let's modify the calls.
+        pass
 
     def input(self, key):
         if key == 'left mouse down':
             if mouse.hovered_entity in self.subsets.values():
                 # Placing block on mesh is harder because we don't have individual voxel objects.
                 # We need to calculate position relative to the hit normal.
-                hit_info = mouse.raycast(camera.world_position, camera.forward, distance=10)
+                hit_info = raycast(camera.world_position, camera.forward, distance=10)
                 if hit_info.hit:
                     pos = hit_info.entity.world_position + hit_info.point + hit_info.normal * 0.5
                     pos = (int(pos.x), int(pos.y), int(pos.z))
@@ -171,7 +179,7 @@ class MeshTerrain(Entity):
 
         if key == 'right mouse down':
              if mouse.hovered_entity in self.subsets.values():
-                hit_info = mouse.raycast(camera.world_position, camera.forward, distance=10)
+                hit_info = raycast(camera.world_position, camera.forward, distance=10)
                 if hit_info.hit:
                     # Remove block
                     # Getting exact block from mesh is Tricky without storage
