@@ -1,24 +1,42 @@
-# Minecraft Basic by Python (Enhanced)
+# Minecraft Basic by Python (Enhanced & Optimized)
 
-A simple but powerful Minecraft-like voxel game built with Python and the Ursina game engine. This project features procedural terrain generation, multiple block types, and an optimized game engine logic.
+A high-performance Minecraft-like voxel game built with Python and the Ursina game engine. This project features procedural terrain generation with OpenSimplex noise, a survival-style HUD, and an optimized mesh-based rendering system.
 
-## 🚀 Major Updates (Performance & Visuals)
+## 🚀 Recent Performance & Gameplay Updates
 
-- **Mesh Terrain System**: Moved from individual entities to a single mesh-based rendering system, boosting FPS essentially to infinity for this scale.
-- **Modular Architecture**: Refactored the monolithic code into a clean, maintainable structure (`minecraft.py`, `mesh_terrain.py`, `player.py`, etc.).
-- **Visual Polish**: Added distance fog, seamless skybox, and vertex-based ambient occlusion (AO) for depth.
-- **Robustness**: Fixed critical crashes and implemented a solid-color fallback for reliable rendering on all systems.
+- **Optimized Mesh Rendering**: Implemented **Face Culling**—only rendering block faces exposed to air. This drastically reduces the polygon count and maximizes FPS.
+- **Survival HUD**: Added a modern UI featuring real-time **Health** and **Stamina** bars.
+- **Advanced Movement**: 
+  - **Sprinting**: Pressing `Shift` increases speed but drains the Stamina bar.
+  - **Recovery**: Stamina regenerates automatically when not sprinting.
+  - **Smooth Transitions**: Implemented Linear Interpolation (Lerp) for natural speed changes.
+- **Visual Polish**: 
+  - **Procedural Clouds**: Dynamic clouds randomly generated in the sky.
+  - **Atmospheric Fog**: Enhanced distance fog for depth and immersion.
+- **Improved Interaction**: Refined block placement and destruction using hit normals for pixel-perfect accuracy.
 
-## Features
+## ✨ Features
 
-- **Procedural Terrain Generation**: Uses OpenSimplex noise to create natural-looking landscapes with hills and valleys.
-- **Optimized Rendering**: Uses chunk-like mesh generation with face culling.
-- **Interactive World**: Place and destroy blocks in real-time.
-- **First-Person Controls**: Smooth movement, sprinting (Shift), and flashlight (F).
-- **Environment**: Day/Night cycle with moving sun and clouds.
-- **Block Types**: Grass, Dirt, Stone, Wood, and Gold.
+- **Procedural Terrain**: OpenSimplex noise-driven landscape generation (hills, valleys, plains).
+- **Survival Mechanics**: Health management and a dynamic stamina system for sprinting.
+- **Optimized Subsets**: One mesh entity per block type for efficient rendering and texturing.
+- **Interactive Environment**: Real-time world manipulation (Place/Destroy).
+- **Visuals**: Day-time skybox, moving clouds, and vertex-colored terrain.
+- **FPS Counter**: Built-in monitor to track performance.
 
-## Installation
+## 🎮 Controls
+
+| Key | Action |
+| :--- | :--- |
+| **W, A, S, D** | Move |
+| **Left Shift** | Sprint (Drains Stamina) |
+| **Space** | Jump |
+| **Left Click** | Place Block |
+| **Right Click** | Destroy Block |
+| **F** | Toggle Flashlight |
+| **ESC** | Quit Game |
+
+## 🛠️ Installation
 
 1. **Clone the repository**:
    ```bash
@@ -31,7 +49,7 @@ A simple but powerful Minecraft-like voxel game built with Python and the Ursina
    pip install -r requirements.txt
    ```
 
-## How to Run
+## 🚀 How to Run
 
 Navigate to the game directory and run the main entry point:
 ```bash
@@ -39,29 +57,26 @@ cd minecraft/minecraft
 python minecraft.py
 ```
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 minecraft-basic-by-python/
 ├── minecraft/
 │   └── minecraft/
-│       ├── minecraft.py      # Main Entry Point
-│       ├── mesh_terrain.py   # Optimized Mesh Generation Logic
-│       ├── player.py         # Player Movement & Input
+│       ├── minecraft.py      # Main Entry Point & HUD Logic
+│       ├── mesh_terrain.py   # Face-Culling & Mesh Generation
+│       ├── player.py         # Survival Logic, HUD & Movement
 │       ├── environment.py    # Sky, Fog, Clouds
-│       ├── voxel.py          # Individual Voxel Logic (Fallback/Hybrid)
-│       ├── config.py         # Global Constants (Seed, World Size)
-│       ├── state.py          # Shared Game State
-│       └── assets/           # Textures (grass.png, etc.)
+│       ├── config.py         # World Constants (Seed, Size, Heights)
+│       └── assets/*.png      # Texture Assets
 ├── requirements.txt          # Python dependencies
-├── .gitignore               # System file exclusions
 └── README.md                # Documentation
 ```
 
-## Future Improvements
+## 🗺️ Roadmap
 
-- Save/load world functionality
-- Enemy AI and basic combat
-- Inventory menu (press 'E')
-- Multiplayer support (UDP/TCP)
-- Biomes (Desert, Forest, Snowy)
+- [ ] Save/Load world functionality
+- [ ] Basic Combat & Enemy AI
+- [ ] Inventory Management (E)
+- [ ] Diverse Biomes (Snowy, Desert)
+- [ ] Multiplayer Support (Socket-based)
