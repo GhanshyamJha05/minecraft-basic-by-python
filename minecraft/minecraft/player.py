@@ -2,6 +2,7 @@ from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 import math
 from environment import Hand
+from inventory import Inventory
 
 class PlayerController(FirstPersonController):
     def __init__(self, **kwargs):
@@ -22,6 +23,7 @@ class PlayerController(FirstPersonController):
         
         # UI Elements
         self.setup_ui()
+        self.inventory = Inventory(player=self)
 
     def setup_ui(self):
         # UI Container
