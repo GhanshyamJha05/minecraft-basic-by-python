@@ -3,6 +3,7 @@ from player import PlayerController
 from mesh_terrain import MeshTerrain
 from environment import Sky, Cloud
 from config import WORLD_SIZE, HEIGHT_MAX
+from state import game_state
 import math # Added for math.floor
 
 # Initialize app and scene
@@ -42,7 +43,7 @@ def input(key):
     # Raycast to detect which block player is looking at
     hit_info = raycast(camera.world_position, camera.forward(), distance=10, ignore=[player])
     
-    if hit_info.hit:
+    if hit_info.hit and not player.inventory.is_open:
         if key == 'left mouse down':
             # Place new block - use hit_point + half normal to find the center of the next voxel
             new_pos = hit_info.world_point + hit_info.normal * 0.5
@@ -53,7 +54,7 @@ def input(key):
                 0 <= new_pos[1] < HEIGHT_MAX * 2 and 
                 0 <= new_pos[2] < WORLD_SIZE and 
                 new_pos not in terrain.voxels):
-                terrain.voxels[new_pos] = '1'  # Add grass block
+                terrain.voxels[new_pos] = game_state.selected_block
                 terrain.update_mesh()
         
         elif key == 'right mouse down':
