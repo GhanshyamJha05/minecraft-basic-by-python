@@ -1,4 +1,4 @@
-# Minecraft Basic by Python 
+# Minecraft Using Python 
 
 A high-performance Minecraft-like voxel game built with Python and the Ursina game engine. This project features procedural terrain generation with OpenSimplex noise, a survival-style HUD, and an optimized mesh-based rendering system.
 
