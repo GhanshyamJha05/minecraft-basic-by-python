@@ -1,7 +1,5 @@
 # Minecraft Using Python 
 
-A high-performance Minecraft-like voxel game built with Python and the Ursina game engine. This project features procedural terrain generation with OpenSimplex noise, a survival-style HUD, and an optimized mesh-based rendering system.
-
 ## 🚀 Recent Performance & Gameplay Updates
 
 - **Optimized Mesh Rendering**: Implemented **Face Culling**—only rendering block faces exposed to air. This drastically reduces the polygon count and maximizes FPS.
