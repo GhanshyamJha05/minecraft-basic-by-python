@@ -80,10 +80,4 @@ minecraft-basic-by-python/
 └── README.md                # Documentation
 ```
 
-## 🗺️ Roadmap
 
-- [ ] Save/Load world functionality
-- [ ] Basic Combat & Enemy AI
-- [x] Inventory Management (E)
-- [ ] Diverse Biomes (Snowy, Desert)
-- [ ] Multiplayer Support (Socket-based)
